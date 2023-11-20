@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import org.springframework.data.annotation.Id;
 
 @Entity
-public class Reader {
+public class Librarian {
     @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,21 +14,14 @@ public class Reader {
 
     private String name;
     private String email;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
+    // Otros campos como contraseña, roles, etc., según tus requerimientos
 
     // Constructores, getters y setters
 
-    public Reader() {
+    public Librarian() {
     }
 
-    public Reader(String name, String email) {
+    public Librarian(String name, String email) {
         this.name = name;
         this.email = email;
     }
@@ -49,4 +42,11 @@ public class Reader {
         this.email = email;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

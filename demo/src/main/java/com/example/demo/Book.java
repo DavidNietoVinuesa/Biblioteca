@@ -1,65 +1,76 @@
 package com.example.demo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import org.springframework.data.annotation.Id;
+
+@Entity
 public class Book {
+    @jakarta.persistence.Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private String author;
-    private String ISBN;
-    private int quantityAvailable;
+    private String isbn;
+    private boolean available;
 
-    // Constructor sin argumentos requerido por JPA
-    public Book() {
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    // Constructor con argumentos
-    public Book(String title, String author, String ISBN, int quantityAvailable) {
-        this.title = title;
-        this.author = author;
-        this.ISBN = ISBN;
-        this.quantityAvailable = quantityAvailable;
-    }
-
-    // Getters y Setters (para todos los atributos)
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    // Constructores, getters y setters
+    public Book() {
+    }
+
+    public Book(String title, String author, String isbn, boolean available) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.available = available;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getAuthor() {
         return author;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
-    public int getQuantityAvailable() {
-        return quantityAvailable;
+    @Override
+    public String toString() {
+        return "Book{" + "id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", available=" + available + '}';
     }
 
-    public void setQuantityAvailable(int quantityAvailable) {
-        this.quantityAvailable = quantityAvailable;
-    }
-
-    // Otros métodos relevantes, como toString(), equals(), etc.
 }

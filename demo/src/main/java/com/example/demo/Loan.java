@@ -1,91 +1,72 @@
 package com.example.demo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToOne;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-@Document(collection = "loans")
+@Entity
 public class Loan {
+    @jakarta.persistence.Id
     @Id
-    private String id;
-    private String bookId;
-    private String readerId;
-    private Date loanDate;
-    private Date returnDate;
-    private boolean returned;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    // Constructor
-    public Loan(String bookId, String readerId, Date loanDate, Date returnDate, boolean returned) {
-        this.bookId = bookId;
-        this.readerId = readerId;
-        this.loanDate = loanDate;
-        this.returnDate = returnDate;
-        this.returned = returned;
-    }
+    @ManyToOne
+    private Book book;
 
-    // Getters y Setters (para todos los atributos)
+    @ManyToOne
+    private Reader reader;
 
-    public String getId() {
-        return id;
-    }
+    private LocalDateTime loanDate;
+    private LocalDateTime returnDate;
 
-    public String getBookId() {
-        return bookId;
-    }
+    public void setId(Long id) {
 
-    public String getReaderId() {
-        return readerId;
-    }
-
-    public Date getLoanDate() {
-        return loanDate;
-    }
-
-    public Date getReturnDate() {
-        return returnDate;
-    }
-
-    public boolean isReturned() {
-        return returned;
-    }
-
-    public void setId(String id) {
         this.id = id;
     }
 
-    public void setBookId(String bookId) {
-        this.bookId = bookId;
+    public Long getId() {
+        return id;
     }
 
-    public void setReaderId(String readerId) {
-        this.readerId = readerId;
+    // Constructores, getters y setters
+
+    public Loan() {
     }
 
-    public void setLoanDate(Date loanDate) {
+    public Loan(Book book, Reader reader, LocalDateTime loanDate, LocalDateTime returnDate) {
+        this.book = book;
+        this.reader = reader;
         this.loanDate = loanDate;
-    }
-
-    public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
     }
 
-    public void setReturned(boolean returned) {
-        this.returned = returned;
+    public Book getBook() {
+        return book;
     }
 
-    // Otros métodos relevantes
+    public Reader getReader() {
+        return reader;
+    }
 
-    @Override
-    public String toString() {
-        return "Loan{" +
-                "id='" + id + '\'' +
-                ", bookId='" + bookId + '\'' +
-                ", readerId='" + readerId + '\'' +
-                ", loanDate=" + loanDate +
-                ", returnDate=" + returnDate +
-                ", returned=" + returned +
-                '}';
+    public LocalDateTime getLoanDate() {
+        return loanDate;
+    }
+
+    public LocalDateTime getReturnDate() {
+        return returnDate;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public void setReader(Reader reader) {
+        this.reader = reader;
     }
 
 }
